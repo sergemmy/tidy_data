@@ -1,12 +1,74 @@
-the original datasets, train and test, were stored in d_test and d_train datesets. d_test has 2947 observations of 561 variables, d_train has 7352 observations of 561 variables. The original datesets were combined for the purpose of cleaning the datasets into a tibble d_tbl. The cleaning of the dataset was purformed the following way.
+the original datasets contained 561 variables. after combining all datasets extracting all variables containing std() and mean() values and adding corresponding subject and activity variables the resulting data set is stored in res data frame (10299 obs. X 68 variables)
 
-1) only variables containing mean() or std() were selected
-2) gather() function was used to convert variables into values
-3) the values of sensor signal were split into the type of function it represent (mean() or std(), the XYZ parameter along which the signal was measured.
+The avg_data data frame is created from res with aggregate function, grouping 2 first variables and applying mean function to each group (per activity per subject)
 
-the resulting tidy dataset containes 679734 observation of 4 variables:
+the resulting data set has the following variables
 
-1) sensor_signal - factor variable with 17 levels, represents the type of signal
-2)xyz_axes -factor variable with 4 levels -X,Y,Z, unknown, X,Y.Z - represents the axes the signal was meassured along, the magnitude measurement is not directional, hence the value "unknown" was used.
-3)mean_std is a factor variable with 2 levels, it represents the statistical function mean() or standard deviation that the value represents.
-4) the value of that function itself.
+ [1] "activity"                                          
+ [2] "subject"                                           
+ [3] "average of tbodyacc mean x"                        
+ [4] "average of tbodyacc mean y"                        
+ [5] "average of tbodyacc mean z"                        
+ [6] "average of tgravityacc mean x"                     
+ [7] "average of tgravityacc mean y"                     
+ [8] "average of tgravityacc mean z"                     
+ [9] "average of tbodyaccjerk mean x"                    
+[10] "average of tbodyaccjerk mean y"                    
+[11] "average of tbodyaccjerk mean z"                    
+[12] "average of tbodygyro mean x"                       
+[13] "average of tbodygyro mean y"                       
+[14] "average of tbodygyro mean z"                       
+[15] "average of tbodygyrojerk mean x"                   
+[16] "average of tbodygyrojerk mean y"                   
+[17] "average of tbodygyrojerk mean z"                   
+[18] "average of tbodyaccmag mean"                       
+[19] "average of tgravityaccmag mean"                    
+[20] "average of tbodyaccjerkmag mean"                   
+[21] "average of tbodygyromag mean"                      
+[22] "average of tbodygyrojerkmag mean"                  
+[23] "average of fbodyacc mean x"                        
+[24] "average of fbodyacc mean y"                        
+[25] "average of fbodyacc mean z"                        
+[26] "average of fbodyaccjerk mean x"                    
+[27] "average of fbodyaccjerk mean y"                    
+[28] "average of fbodyaccjerk mean z"                    
+[29] "average of fbodygyro mean x"                       
+[30] "average of fbodygyro mean y"                       
+[31] "average of fbodygyro mean z"                       
+[32] "average of fbodyaccmag mean"                       
+[33] "average of fbodybodyaccjerkmag mean"               
+[34] "average of fbodybodygyromag mean"                  
+[35] "average of fbodybodygyrojerkmag mean"              
+[36] "average of tbodyacc standard deviation x"          
+[37] "average of tbodyacc standard deviation y"          
+[38] "average of tbodyacc standard deviation z"          
+[39] "average of tgravityacc standard deviation x"       
+[40] "average of tgravityacc standard deviation y"       
+[41] "average of tgravityacc standard deviation z"       
+[42] "average of tbodyaccjerk standard deviation x"      
+[43] "average of tbodyaccjerk standard deviation y"      
+[44] "average of tbodyaccjerk standard deviation z"      
+[45] "average of tbodygyro standard deviation x"         
+[46] "average of tbodygyro standard deviation y"         
+[47] "average of tbodygyro standard deviation z"         
+[48] "average of tbodygyrojerk standard deviation x"     
+[49] "average of tbodygyrojerk standard deviation y"     
+[50] "average of tbodygyrojerk standard deviation z"     
+[51] "average of tbodyaccmag standard deviation"         
+[52] "average of tgravityaccmag standard deviation"      
+[53] "average of tbodyaccjerkmag standard deviation"     
+[54] "average of tbodygyromag standard deviation"        
+[55] "average of tbodygyrojerkmag standard deviation"    
+[56] "average of fbodyacc standard deviation x"          
+[57] "average of fbodyacc standard deviation y"          
+[58] "average of fbodyacc standard deviation z"          
+[59] "average of fbodyaccjerk standard deviation x"      
+[60] "average of fbodyaccjerk standard deviation y"      
+[61] "average of fbodyaccjerk standard deviation z"      
+[62] "average of fbodygyro standard deviation x"         
+[63] "average of fbodygyro standard deviation y"         
+[64] "average of fbodygyro standard deviation z"         
+[65] "average of fbodyaccmag standard deviation"         
+[66] "average of fbodybodyaccjerkmag standard deviation" 
+[67] "average of fbodybodygyromag standard deviation"    
+[68] "average of fbodybodygyrojerkmag standard deviation"

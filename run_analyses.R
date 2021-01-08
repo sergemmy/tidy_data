@@ -26,5 +26,5 @@ res<-d_tbl %>% select(contains("mean()"),contains("std()"))%>%
   select(sensor_signal, xyz_axes, mean_std, value) %>%
   mutate_at(vars(sensor_signal, xyz_axes, mean_std), list(factor)) 
   
-
+write.table(res, file="c:/Users/serge/Documents/res_tidy.txt",row.names = FALSE)
   
