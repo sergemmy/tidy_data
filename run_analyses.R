@@ -25,13 +25,29 @@ library(tidyr)
   d_tbl<-tbl_df(d_tt)
   colnames(d_tbl)<-col_names
       res<-d_tbl %>% select("activity","subject",contains("mean()"),contains("std()"))%>%
-        mutate(activity=case_when(activity==1 ~ "WALKING",
+          mutate(activity=case_when(activity==1 ~ "WALKING",
                                   activity==2 ~ "WALKING_UPSTAIRES",
                                   activity==3 ~ "WALKING_DOWNSTAIRES",
                                   activity==4 ~ "SITTING",
                                   activity==5 ~ "STANDING",
                                   activity==6 ~ "LAYING"))%>%
-      mutate_at(vars(activity, subject), list(factor))
-  
-write.table(avg_data, file="c:/Users/serge/Documents/res_tidy.txt",row.names = FALSE)
+          mutate_at(vars(activity, subject), list(factor))
+      
+  #cleaning column names
+  col_names<-names(res)
+  col_names<-gsub("-"," ",col_names)
+  col_names<-gsub("\\()","",col_names)
+  col_names <- gsub("^f", "frequencyDomain", col_names)
+  col_names <- gsub("^t", "timeDomain", col_names)
+  col_names<- gsub("Acc", "Accelerometer", col_names)
+  col_names<- gsub("Gyro", "Gyroscope", col_names)
+  col_names<- gsub("Mag", "Magnitude", col_names)
+  col_names <- gsub("Freq", "Frequency", col_names)
+  col_names <- gsub("mean", "Mean", col_names)
+  col_names <- gsub("std", "StandardDeviation", col_names)
+  col_names<-gsub("BodyBody", "Body", col_names)
+  names(res)<-col_names
+  source("average_subject.R")
+
+  write.table(avg_data, file="c:/Users/serge/Documents/res_tidy.txt",row.names = FALSE)
   
